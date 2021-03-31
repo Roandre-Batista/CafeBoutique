@@ -1,2 +1,2 @@
 # CafeBoutique
-Repositório referente ao projeto do site "Café Boutique". Algumas páginas estáticas e uma área administrativa.
+Repositório referente ao projeto "Café Boutique". Algumas páginas estáticas, uma área administrativa e muita gambiarra.

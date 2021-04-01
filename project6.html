@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Pedidos</title>
+    <link rel="shortcut icon" href="favicon-32x32.png" type="image/x-icon">
+</head>
+
+
+
+
+<body id="bodyC"></body>
+
+    <div id="body6">
+    <section>
+    <article>
+    <div id='content'> 
+    <div id='content-app'>
+    <input type='text' id='field1' readonly value='0' />
+          <br /><br />
+          <button onclick='writeNumber(this)' id='n1'>1</button>
+          <button onclick='writeNumber(this)' id='n2'>2</button>
+          <button onclick='writeNumber(this)' id='n3'>3</button>
+          <button onclick='writeNumber(this)' id='n4'>4</button>
+                  <br /><br />
+                  <button onclick='writeNumber(this)' id='n5'>5</button>
+                  <button onclick='writeNumber(this)' id='n6'>6</button>
+                  <button onclick='writeNumber(this)' id='n7'>7</button>
+                  <button onclick='writeNumber(this)' id='n8'>8</button>
+                  <br /><br />
+          <button onclick='writeNumber(this)' id='n9'>9</button>
+          <button onclick='writeNumber(this)' id='n0'>0</button>
+          <button onclick='setDecimal(this,true)' id='dec'>.</button>
+          <button onclick='setOperator(this)' id='sum'>+</button>
+                  <br /><br />
+                  <button onclick='setOperator(this)' id='sustract'>-</button>
+                  <button onclick='setOperator(this)' id='multi'>*</button>
+                  <button onclick='setOperator(this)' id='divide'>/</button>
+                  <button onclick='cleartxt()' id='C'>C</button>
+                  <br /><br />
+          <button onclick='calculate()' id='calcular' style='width:190px'>=</button>
+          <button onclick='removeLastNumber()' id='removeLast'>X</button>
+          </div>
+          </div>
+              <br />
+              <br /><br />
+            </article>
+          </section>
+              
+    </div>
+            
+    <div id="body7">
+<h3 id="C_1">Cliente</h3>
+<p id="C1"></p>
+<h3 id="C_2"> Pedidos </h3>
+<p id="C2"></p>
+<p id="C3"></p>
+<p id="C4"></p>
+<p id="C5"></p>
+<p id="C6"></p>
+
+    </div>
+
+<script>
+function Escrever_valores()
+{
+document.getElementById('C1').innerHTML+=sessionStorage.NOMEdoCLIENTE;
+document.getElementById('C2').innerHTML+=sessionStorage.PEDIDOdoCLIENTE_1;
+document.getElementById('C3').innerHTML+=sessionStorage.PEDIDOdoCLIENTE_2;
+document.getElementById('C4').innerHTML+=sessionStorage.PEDIDOdoCLIENTE_3;
+document.getElementById('C5').innerHTML+=sessionStorage.PEDIDOdoCLIENTE_4;
+document.getElementById('C6').innerHTML+=sessionStorage.PEDIDOdoCLIENTE_5;
+}
+window.addEventListener("load", Escrever_valores);
+
+
+
+function writeNumber(elementId) {
+    var outputValueTo = document.getElementById('field1');
+  
+    if (outputValueTo.value == '0' || outputValueTo.value == 'Algo deu errado.') {
+      outputValueTo.value = elementId.textContent;
+    } else {
+  
+      outputValueTo.value += elementId.textContent;
+    }
+  }
+  
+  function cleartxt() {
+    document.getElementById('field1').value = '0';
+    document.getElementById('dec').disabled = false;
+  }
+  
+  function setOperator(elementId) {
+    var outputValueTo = document.getElementById('field1');
+    if (outputValueTo.value == '0' || outputValueTo.value == 'Syntax error') {
+      outputValueTo.value = '0';
+    } else {
+      outputValueTo.value += elementId.textContent;
+      document.getElementById('dec').disabled = false;
+    }
+  }
+  
+  function setDecimal(elementId, status) {
+    var outputValueTo = document.getElementById('field1');
+    outputValueTo.value += elementId.textContent;
+    document.getElementById('dec').disabled = status;
+  }
+  
+  function calculate() {
+  
+    try {
+  
+      var field1txt = document.getElementById('field1');
+      if (field1txt.value != '') {
+        var calculateResult = eval(field1txt.value);
+        field1txt.value = calculateResult;
+      }
+    } catch (err) {
+  
+      field1txt.value = 'Syntax error';
+  
+    }
+  
+  }
+  
+  function removeLastNumber() {
+  
+    var field1txt = document.getElementById('field1');
+  
+    if (field1txt.value.length == 1 || field1txt.value == '0' || field1txt.value == 'Syntax error') {
+      field1txt.value = '0';
+      document.getElementById('dec').disabled = false;
+    } else {
+      field1txt.value = field1txt.value.substring(0, field1txt.value.length - 1);
+    }
+  }
+</script>
+
+</body>
+</html>
